@@ -1,0 +1,11 @@
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace BookHive.DBClient.EntityModels
+{
+    public class Sample
+    {
+        [Key]
+        public int SampleId { get; set; }
+        public string SampleName { get; set; }
+    }
+}
