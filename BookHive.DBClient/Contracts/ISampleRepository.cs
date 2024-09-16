@@ -1,5 +1,4 @@
 ﻿
-
 using BookHive.DBClient.EntityModels;
 
 namespace BookHive.DBClient.Contracts

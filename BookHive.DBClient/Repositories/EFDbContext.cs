@@ -8,6 +8,8 @@ namespace BookHive.DBClient.Repositories
         public EFDbContext(DbContextOptions<EFDbContext> options) : base(options) { }
 
         public DbSet<Sample> Samples { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<BookCategory> BookCategories { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder){}
     }

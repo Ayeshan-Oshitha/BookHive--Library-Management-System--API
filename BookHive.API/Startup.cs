@@ -28,6 +28,9 @@ namespace BookHive.API
 
             // Configure DBClient dependency injection repositories
             services.AddScoped<ISampleRepository, EFSampleRepository>();
+            services.AddScoped<IBookRepository, EFBookRepository>();
+            services.AddScoped<IBookCategoryRepository, EFBookCateogaryRepository>();
+
 
             services.AddControllers();
 
