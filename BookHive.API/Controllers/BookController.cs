@@ -1,4 +1,5 @@
 ﻿using BookHive.DBClient.Contracts;
+using BookHive.DBClient.Mappers;
 using log4net;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,8 @@ namespace BookHive.API.Controllers
                 {
                     return NoContent();
                 }
-                return Ok(books);
+                var bookDto = books.Select(s => s.ToBookDtoAuthor()).ToList();
+                return Ok(bookDto);
             }
             catch (Exception ex)
             {
