@@ -4,6 +4,8 @@ namespace BookHive.DBClient.Contracts
 {
     public interface IBookCategoryRepository
     {
-        IQueryable<BookCategory> GetAllBookCategoriesByAdmin();
+        IQueryable<BookCategory> GetAllBookCategories();
+        Task<BookCategory> GetBookCateogaryById(int id);
+        Task<BookCategory> CreateBookCateogary(BookCategory bookCategoryModel);
     }
 }
