@@ -59,11 +59,37 @@ namespace BookHive.API.Controllers
 
         [Route("CreateBookCateogary")]
         [HttpPost]
-        public async Task<IActionResult> CreateBookCateogary([FromBody] CreateBookCategoryRequestDto bookCateogaryDto)
+        public async Task<IActionResult> CreateBookCateogary([FromBody] CreateBookCategoryDto bookCateogaryDto)
         {
             var bookCategoryModel = bookCateogaryDto.ToBookCateogaryFromCreateDto();
-            await _bookCategoryRepository.CreateBookCateogary(bookCategoryModel);
-            return CreatedAtAction( nameof(GetBookCategoryById), new { id = bookCategoryModel.CateogaryId  }, bookCategoryModel.ToBookCateogaryDto());
+            var bookCateogary = await _bookCategoryRepository.CreateBookCateogary(bookCategoryModel);
+           return CreatedAtAction( nameof(GetBookCategoryById), new { id = bookCategoryModel.CateogaryId  }, bookCategoryModel.ToBookCateogaryDto());
+            // return Ok(bookCateogary); This can use too
+        }
+
+        [Route("UpdateBookCateogary/{id:int}")]
+        [HttpPut]
+        public async Task<IActionResult> UpdateBookCateogary([FromRoute] int id, [FromBody] UpdateBookCateogaryDto bookCateogaryDto)
+        {
+            var bookCateogaryModel = bookCateogaryDto.ToBookCateogaryFromUpdateDto();
+            var bookCateogary = await _bookCategoryRepository.UpdateBookCateogary(id, bookCateogaryModel);
+            if (bookCateogary == null)
+            {
+                return NoContent();
+            }
+            return Ok(bookCateogary);
+        }
+
+        [Route("DeleteBookCateogary/{id:int}")]
+        [HttpDelete]
+        public async Task<IActionResult> DeleteBookCateogary([FromRoute] int id)
+        {
+            var bookCateogary = await _bookCategoryRepository.DeleteBookCateogary(id);
+            if (bookCateogary == null)
+            {
+                return NoContent();
+            }
+            return Ok(bookCateogary);
         }
 
     }

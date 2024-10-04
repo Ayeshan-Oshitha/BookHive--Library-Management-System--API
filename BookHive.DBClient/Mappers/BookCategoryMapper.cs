@@ -6,7 +6,7 @@ namespace BookHive.DBClient.Mappers
 {
     public static class BookCategoryMapper
     {
-        public static BookCategoryDto  ToBookCateogaryDto(this BookCategory bookCategoryModel)
+        public static BookCategoryDto ToBookCateogaryDto(this BookCategory bookCategoryModel)
         {
             return new BookCategoryDto
             {
@@ -16,13 +16,24 @@ namespace BookHive.DBClient.Mappers
             };
         }
 
-        public static BookCategory ToBookCateogaryFromCreateDto(this CreateBookCategoryRequestDto bookCategoryDto)
+        public static BookCategory ToBookCateogaryFromCreateDto(this CreateBookCategoryDto bookCategoryDto)
         {
             return new BookCategory
             {
                 Name = bookCategoryDto.Name,
                 Description = bookCategoryDto.Description,
             };
+        }
+
+        public static BookCategory ToBookCateogaryFromUpdateDto(this UpdateBookCateogaryDto bookCategoryDto)
+        {
+            {
+                return new BookCategory
+                {
+                    Name = bookCategoryDto.Name,
+                    Description = bookCategoryDto.Description,
+                };
+            }
         }
     }
 }

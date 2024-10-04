@@ -34,6 +34,29 @@ namespace BookHive.DBClient.Repositories
             return bookCategoryModel;
         }
 
-        
+        public async Task<BookCategory> UpdateBookCateogary(int id, BookCategory bookCategoryModel)
+        {
+           var existingBookCateogary = await _dbContext.BookCategories.FirstOrDefaultAsync( x => x.CateogaryId == id); 
+            if (existingBookCateogary == null)
+            {
+                return null;
+            }
+            existingBookCateogary.Name = bookCategoryModel.Name;
+            existingBookCateogary.Description = bookCategoryModel.Description;
+            await _dbContext.SaveChangesAsync();
+            return existingBookCateogary;
+        }
+
+        public async Task<BookCategory> DeleteBookCateogary(int id)
+        {
+            var bookCateogary = await _dbContext.BookCategories.FirstOrDefaultAsync( x => x.CateogaryId == id);
+            if(bookCateogary == null)
+            {
+                return null;
+            }
+            _dbContext.BookCategories.Remove(bookCateogary);
+            await _dbContext.SaveChangesAsync();
+            return bookCateogary;
+        }
     }
 }
